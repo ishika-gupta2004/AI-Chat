@@ -14,8 +14,12 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: "http://localhost:5173"
-}));
+  origin: [
+    "http://localhost:5173",
+    "https://ai-chat-three-iota-14.vercel.app"
+  ],
+  credentials: true // agar cookies/auth headers use kar rahe hain to
+}))
 console.log(require("cors"));
 
 app.get("/", (req, res) => {
