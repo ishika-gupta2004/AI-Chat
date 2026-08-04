@@ -10,6 +10,8 @@ function ChatBox({ messages, loading }) {
         });
     }, [messages, loading]);
 
+    
+
     return (
         <div className="flex-1 overflow-y-auto bg-white">
             <div className="max-w-3xl mx-auto px-6 py-6">

@@ -14,21 +14,6 @@ const sendMessage = async (req, res) => {
             message
         });
 
-
-        // const chats = await Chat.find().sort({ createdAt: 1 });
-        // const chats = await Chat.find()
-        //     .sort({ createdAt: -1 })
-        //     .limit(10);
-
-
-        // const history = chats.map((chat) => ({
-        //     role: chat.role,
-        //     content: chat.message
-        // }));
-
-
-        // const aiReply = await generateReply(history);
-
         const chats = await Chat.find().sort({ createdAt: 1 });
 
         const history = [
@@ -89,6 +74,21 @@ const getChats = async (req, res) => {
 
 };
 
+const deleteChats = async (req, res) => {
+    try {
+        await Chat.deleteMany({});
+        res.json({
+            success: true,
+            message: "All message deleted"
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
 module.exports = {
-    sendMessage, getChats
+    sendMessage, getChats , deleteChats
 };
