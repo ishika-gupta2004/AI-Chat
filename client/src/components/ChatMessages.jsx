@@ -9,7 +9,7 @@ function Avatar({ isUser }) {
     );
 }
 
-function ChatMessage({ role, message }) {
+function ChatMessage({ role, message, imageUrl }) {
     const isUser = role === "user";
 
     return (
@@ -22,7 +22,14 @@ function ChatMessage({ role, message }) {
                         : "text-gray-800"
                     }`}
             >
-                <p className="whitespace-pre-wrap">{message}</p>
+                {imageUrl && (
+                    <img
+                        src={imageUrl}
+                        alt={message || "Uploaded image"}
+                        className="mb-2 max-h-64 rounded-lg object-cover"
+                    />
+                )}
+                {message && <p className="whitespace-pre-wrap">{message}</p>}
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 const Chat = require("../models/Chat");
-const { generateReply } = require("../services/aiService");
+const { generateReply , generateImageReply } = require("../services/aiService");
 
 const sendMessage = async (req, res) => {
 
@@ -89,6 +89,38 @@ const deleteChats = async (req, res) => {
     }
 }
 
+const uploadImage = async (req, res) => {
+    try {
+        console.log("REQ FILE:", req.file);
+
+        if (!req.file) {
+            return res.status(400).json({
+                success: false,
+                message: "No image uploaded"
+            });
+        }
+
+        const aiReply = await generateImageReply(
+            req.file.buffer,
+            req.file.mimetype,
+            "What is in this image? Describe it clearly."
+        );
+
+        res.json({
+            success: true,
+            reply: aiReply
+        });
+
+    } catch (error) {
+        console.log("IMAGE AI ERROR:", error.response?.data || error.message);
+
+        res.status(500).json({
+            success: false,
+            message: error.response?.data?.error?.message || error.message
+        });
+    }
+};
+
 module.exports = {
-    sendMessage, getChats , deleteChats
+    sendMessage, getChats , deleteChats , uploadImage
 };

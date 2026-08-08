@@ -26,6 +26,7 @@ function ChatBox({ messages, loading }) {
                         key={index}
                         role={item.role}
                         message={item.message}
+                        imageUrl={item.imageUrl}
                     />
                 ))}
 
