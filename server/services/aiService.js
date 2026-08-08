@@ -38,7 +38,7 @@ const generateImageReply = async (imageBuffer, mimetype, question) => {
                     content: [
                         {
                             type: "text",
-                            text: question || "What is in this image? Describe it clearly."
+                            text: question || "Analyze this image and describe what you see. Do not provide a safety classification. Focus on the objects, people, text, scene, and overall context visible in the image."
                         },
                         {
                             type: "image_url",

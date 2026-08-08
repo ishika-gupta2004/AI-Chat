@@ -82,6 +82,8 @@ function ChatInput({
                 const formData = new FormData();
                 formData.append("image", selectedImage);
 
+                setSelectedImage(null);
+
                 const response = await api.post("/chat/image", formData);
 
                 // AI response
